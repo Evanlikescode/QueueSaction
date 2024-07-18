@@ -1,0 +1,21 @@
+{% extends './layout/main.html' %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+<div class="container-xxl flex-grow-1 container-p-y">
+    {% include 'admin/table/table.html' %}
+    <br>
+    <div class="row">
+        {% include 'admin/transactions/order_statistic.html' %}
+
+        {% include 'admin/transactions/transaction.html' %}
+    </div>
+    <br>
+    
+</div>
+
+
+{% endblock %}

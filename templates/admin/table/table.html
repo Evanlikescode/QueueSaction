@@ -1,0 +1,41 @@
+ <!-- Basic Bootstrap Table -->
+ <div class="card">
+    <h5 class="card-header">
+      <a href="{{ url_for('management_app.queue_management_add') }}" style="color: rgb(106, 45, 142)">Queue Dateline (+)</a>
+    </h5>
+    <div class="table-responsive text-nowrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Client</th>
+            <th>Amount</th>
+            <th>Dateline</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody class="table-border-bottom-0">
+          {% for x in data %}
+          <tr>
+            <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ x.get('title_payment') }}</strong></td>
+            <td>{{ x.get('client_name') }}</td>
+            <td>
+             {{ x.get('amount') }}
+            </td>
+            <td><span class="badge bg-label-primary me-1">{{ x.get('dateline') }}</span></td>
+            
+            <td><span class="badge bg-label-danger me-1">{{ x.get('status_name') }}</span></td>
+            <td>
+              <a href="{{ url_for('management_app.queue_management_pay', id_transaction=x.get('id')) }}" class="btn btn-primary">Pay</a>
+              <a href="{{ url_for('management_app.queue_management_cancel', id_transaction=x.get('id')) }}" class="btn btn-warning">Cancel</a>
+              <a href="{{ url_for('management_app.queue_management_delete', id_transaction=x.get('id')) }}" class="btn btn-danger">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+         
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!--/ Basic Bootstrap Table -->

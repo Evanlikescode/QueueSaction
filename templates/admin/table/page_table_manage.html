@@ -1,0 +1,71 @@
+{% extends './layout/main.html' %}
+
+{% block title %}
+Create Queue Table
+{% endblock %}
+
+{% block content %}
+<div class="container-xxl flex-grow-1 container-p-y" >
+    <div class="col-xxl">
+        <div class="card mb-4">
+          <div class="card-header d-flex align-items-center justify-content-between">
+            <h5 class="mb-0">Queue Form</h5>
+          </div>
+          <div class="card-body">
+            <form method="POST" action="{{ url_for('management_app.queue_management_add') }}">
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Title</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control"  name="title_payment" placeholder="Uang Les Inggris" />
+                </div>
+              </div>
+              
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="basic-default-email">Dateline</label>
+                <div class="col-sm-10">
+                  <div class="input-group input-group-merge">
+                    <input
+                      type="datetime-local"
+                      class="form-control"
+                      name="dateline"
+                      placeholder="joh"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="basic-default-phone">Client</label>
+                <div class="col-sm-10">
+                    <select class="form-select" name="client">
+                        {% for x in client_data %}
+                        <option value="{{ x.get('client_id') }}">{{ x.get('client_name') }} - {{ x.get('job_title') }}</option>
+                        {% endfor %}
+                      </select>                      
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="basic-default-company">Amount</label>
+                <div class="col-sm-10">
+                  <input
+                    type="number"
+                    name="amount"
+                    class="form-control"
+                    placeholder="375000"
+                  />
+                </div>
+              </div>
+              </div>
+              <div class="row justify-content-end">
+                <div class="col-sm-10 ">
+                  <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+              </div>
+              <br>
+            </form>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+{% endblock %}
