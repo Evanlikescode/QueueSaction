@@ -9,8 +9,8 @@ A queue transaction platform focused on helping people easily manage their thous
 - Login system, including sign up and log out
 - Account management
 - Queue management (fetch, insert, update, delete)
-- Monthly sum transactions
-- Weekly transactions details
+- Monthly total transactions
+- Monthly and weekly transactions details
 
 
 ## Web Templates
