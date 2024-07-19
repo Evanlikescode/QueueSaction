@@ -106,6 +106,35 @@ class PaymentMethod(BaseMethod):
         self.cur.close
         return True
     
+    def historyPaymentWeek(self, value):
+        self.cur.execute(f"SELECT title_payment, amount FROM {self.tableName.get('payment')} WHERE user_id = %s AND status = 1001 AND updated_at >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK) LIMIT 10", (value.get('user_id'),))
+        data = self.cur.fetchall()
+        self.cur.close
+        if data != None:
+            lists = []
+            for x in data:
+                lists.append({
+                    'title_payment': x[0],
+                    'amount': x[1]
+                })
+            return lists
+        return False
+
+    def historyPaymentMonthly(self, value):
+        self.cur.execute(f"SELECT title_payment, amount FROM {self.tableName.get('payment')} WHERE user_id = %s AND status = 1001 AND updated_at >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)", (value.get('user_id'),))
+        data = self.cur.fetchall()
+        self.cur.close
+        if data != None:
+            lists = []
+            for x in data:
+                lists.append({
+                    'title_payment': x[0],
+                    'amount': x[1]
+                })
+            return lists
+        return False
+
+
     def actionPayment(self, value):
         status = 1001
         if value.get('status').lower() == "cancel":

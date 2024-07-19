@@ -19,7 +19,20 @@ def main():
     data = paymentMethod.fetchPayment({
         'user_id': session.get('id')
     })
-    return render_template("admin/index.html", data=data)
+
+    transaction_data = paymentMethod.historyPaymentWeek({
+        'user_id': session.get('id')
+    })
+
+    sum_transaction_data = paymentMethod.historyPaymentMonthly({
+        'user_id': session.get('id')
+    })
+    sum_transaction = []
+    for x in sum_transaction_data:
+        sum_transaction.append(x.get('amount'))
+    sum_clean_data = sum(sum_transaction)
+
+    return render_template("admin/index.html", data=data, transaction_data = transaction_data, sum_clean_data = sum_clean_data)
 
 @management_app.route('/account-settings', methods=['POST', 'GET'])
 def account_management():
@@ -152,3 +165,15 @@ def queue_management_delete(id_transaction):
         "transaction_id": id_transaction
     })
     return redirect(url_for('management_app.main'))
+
+
+@management_app.route('/history-transaction-monthly')
+def historyTransaction():
+    if middleware.is_login() == False:
+        return redirect(url_for('login'))
+    
+    transaction_data = paymentMethod.historyPaymentMonthly({
+        'user_id': session.get('id')
+    })
+
+    return render_template('admin/transactions/page_transaction.html', transaction_data=transaction_data )
