@@ -8,7 +8,7 @@ A queue transaction platform focused on helping people easily manage their trans
 
 - Login system, including sign up and log out
 - Account management
-- Queue management (fetch, insert, update, delete)
+- Queue management
 - Monthly total transactions
 - Monthly and weekly transactions details
 
