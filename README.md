@@ -1,7 +1,7 @@
 
 # QueueSaction
 
-A queue transaction platform focused on helping people easily manage their thousands of transaction deadlines.
+A queue transaction platform focused on helping people easily manage their transaction deadlines.
 
 
 ## Features
