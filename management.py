@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, session, request, flash
+from flask import Blueprint, render_template, redirect, url_for, session, request
 from werkzeug.utils import secure_filename
 import os, datetime
 from helper.middleware import Middleware
@@ -40,14 +40,14 @@ def account_management():
         return redirect(url_for('login'))
     if request.method == "POST":
         if 'new_image' not in request.files:
-            flash('No File part')
             return redirect(request.url)
         file = request.files['new_image']
         path = session.get('profile_picture')
         if file.filename != '':
             filename = secure_filename(file.filename)
-            path = os.path.join(upload_path, filename)
-            file.save(os.path.join('.{}'.format(upload_path), filename))
+            unique_filename = f"{session.get('id')}_{filename}"
+            path = os.path.join(upload_path, unique_filename)
+            file.save(os.path.join('.{}'.format(upload_path), unique_filename))
             try:
                 os.remove(".{}".format(session.get('profile_picture')))
             except FileNotFoundError:
